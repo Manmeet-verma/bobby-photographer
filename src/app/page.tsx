@@ -11,7 +11,6 @@ import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
 import Marquee from "@/components/Marquee";
-import CustomCursor from "@/components/CustomCursor";
 import BackToTop from "@/components/BackToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CTA from "@/components/CTA";
@@ -21,7 +20,6 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <CustomCursor />
       <ScrollProgress />
       <main>
         <Navbar />

@@ -285,27 +285,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-cream-muted">
-            Scroll Down
-          </span>
-          <motion.div
-            animate={{ scaleY: [1, 0.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-px h-6 sm:h-8 bg-gradient-to-b from-gold to-transparent"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

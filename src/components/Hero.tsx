@@ -1,8 +1,19 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+
+const particles = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 4 + 1,
+  duration: Math.random() * 10 + 15,
+  delay: Math.random() * 5,
+}));
+
+const typingWords = ["Timeless", "Stunning", "Unforgettable", "Breathtaking"];
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,17 +24,70 @@ export default function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % typingWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (rect) {
+      mouseX.set((e.clientX - rect.left - rect.width / 2) / 20);
+      mouseY.set((e.clientY - rect.top - rect.height / 2) / 20);
+    }
+  };
 
   return (
     <section
       id="home"
       ref={ref}
+      onMouseMove={handleMouseMove}
       className="relative min-h-screen flex items-center hero-gradient overflow-hidden"
     >
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-gold/20"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/40 to-dark z-10" />
-        <div className="absolute top-20 right-20 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[120px]" />
-        <div className="absolute bottom-20 left-20 w-[400px] h-[400px] rounded-full bg-gold/[0.03] blur-[100px]" />
+        <motion.div
+          style={{ x: springX, y: springY }}
+          className="absolute top-20 right-20 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[120px]"
+        />
+        <motion.div
+          style={{ x: useSpring(useMotionValue(-mouseX.get()), { stiffness: 30, damping: 15 }), y: useSpring(useMotionValue(-mouseY.get()), { stiffness: 30, damping: 15 }) }}
+          className="absolute bottom-20 left-20 w-[400px] h-[400px] rounded-full bg-gold/[0.03] blur-[100px]"
+        />
       </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
@@ -52,7 +116,16 @@ export default function Hero() {
               className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.1] font-bold"
             >
               <span className="block">Capturing</span>{" "}
-              <span className="gradient-text italic">Timeless</span>{" "}
+              <motion.span
+                key={wordIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="gradient-text italic inline-block"
+              >
+                {typingWords[wordIndex]}
+              </motion.span>{" "}
               <span className="block">Moments</span>
             </motion.h1>
 
@@ -77,7 +150,7 @@ export default function Hero() {
                 href="#gallery"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gold text-dark font-semibold uppercase tracking-wider text-sm hover:bg-gold-light transition-colors duration-300 shadow-lg shadow-gold/20"
+                className="px-8 py-4 bg-gold text-dark font-semibold uppercase tracking-wider text-sm hover:bg-gold-light transition-colors duration-300 shadow-lg shadow-gold/20 gold-shine"
               >
                 View Portfolio
               </motion.a>
@@ -85,7 +158,7 @@ export default function Hero() {
                 href="#contact"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.15)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border border-gold/40 text-gold font-medium uppercase tracking-wider text-sm hover:bg-gold/10 transition-colors duration-300"
+                className="px-8 py-4 border border-gold/40 text-gold font-medium uppercase tracking-wider text-sm hover:bg-gold/10 transition-colors duration-300 gold-border"
               >
                 Get in Touch
               </motion.a>
@@ -107,11 +180,9 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 + i * 0.15 }}
+                  whileHover={{ scale: 1.05 }}
                 >
-                  {i > 0 && (
-                    <div className="w-px h-12 bg-dark-border absolute -ml-4" />
-                  )}
-                  <span className="block font-display text-3xl font-bold text-gold">
+                  <span className="block font-display text-3xl font-bold text-gold text-glow">
                     {stat.value}
                   </span>
                   <span className="text-xs uppercase tracking-wider text-cream-muted">
@@ -129,8 +200,8 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 60, rotate: -2 }}
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.5 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="rounded-lg overflow-hidden shadow-2xl"
+                  whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
+                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop"
@@ -139,15 +210,15 @@ export default function Hero() {
                     height={800}
                     priority
                     sizes="(max-width: 1024px) 100vw, 30vw"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 60, rotate: 1 }}
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.7 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="rounded-lg overflow-hidden shadow-2xl"
+                  whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
+                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=500&fit=crop"
@@ -156,7 +227,7 @@ export default function Hero() {
                     height={500}
                     priority
                     sizes="(max-width: 1024px) 100vw, 30vw"
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
               </div>
@@ -165,8 +236,8 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 60, rotate: 2 }}
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.6 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="rounded-lg overflow-hidden shadow-2xl"
+                  whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
+                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=500&fit=crop"
@@ -175,15 +246,15 @@ export default function Hero() {
                     height={500}
                     priority
                     sizes="(max-width: 1024px) 100vw, 30vw"
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 60, rotate: -1 }}
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.8 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="rounded-lg overflow-hidden shadow-2xl"
+                  whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
+                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&h=800&fit=crop"
@@ -192,7 +263,7 @@ export default function Hero() {
                     height={800}
                     priority
                     sizes="(max-width: 1024px) 100vw, 30vw"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
               </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -35,13 +35,31 @@ const testimonials = [
 export default function Testimonials() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [current, setCurrent] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % testimonials.length);
+    setProgress(0);
+  }, []);
 
   useEffect(() => {
+    if (isPaused) return;
+    const duration = 5000;
+    const interval = 50;
+    let elapsed = 0;
+
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+      elapsed += interval;
+      setProgress((elapsed / duration) * 100);
+      if (elapsed >= duration) {
+        next();
+        elapsed = 0;
+      }
+    }, interval);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [current, isPaused, next]);
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
@@ -50,7 +68,14 @@ export default function Testimonials() {
       </div>
 
       <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[150px]" />
+      <motion.div
+        animate={{
+          x: [0, 50, -50, 0],
+          y: [0, -30, 30, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[150px]"
+      />
 
       <div ref={ref} className="relative z-10 max-w-4xl mx-auto px-6 pt-16">
         <motion.div
@@ -68,44 +93,59 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="relative min-h-[280px]">
+        <div
+          className="relative min-h-[320px]"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.5 }}
-              className="glass-card p-10 text-center"
+              initial={{ opacity: 0, x: 80, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -80, scale: 0.95 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="glass-card p-10 text-center gold-shine"
             >
-              <div className="flex justify-center mb-6">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="flex justify-center mb-6"
+              >
                 {Array.from({ length: testimonials[current].rating }).map(
                   (_, i) => (
-                    <svg
+                    <motion.svg
                       key={i}
+                      initial={{ opacity: 0, rotate: -180 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      transition={{ delay: 0.3 + i * 0.1 }}
                       className="w-5 h-5 text-gold mx-0.5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    </motion.svg>
                   )
                 )}
-              </div>
+              </motion.div>
               <blockquote className="font-display text-xl lg:text-2xl text-cream italic leading-relaxed mb-8">
                 &ldquo;{testimonials[current].text}&rdquo;
               </blockquote>
               <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center">
-                  <span className="font-display text-lg text-gold font-bold">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center border-2 border-gold/30"
+                >
+                  <span className="font-display text-xl text-gold font-bold">
                     {testimonials[current].name.charAt(0)}
                   </span>
-                </div>
+                </motion.div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-cream">
+                  <h4 className="font-semibold text-cream text-lg">
                     {testimonials[current].name}
                   </h4>
-                  <span className="text-xs text-cream-muted uppercase tracking-wider">
+                  <span className="text-xs text-gold uppercase tracking-wider">
                     Valued Client
                   </span>
                 </div>
@@ -118,14 +158,51 @@ export default function Testimonials() {
           {testimonials.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrent(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === current
-                  ? "w-10 bg-gold"
-                  : "w-4 bg-dark-border hover:bg-gold/40"
-              }`}
-            />
+              onClick={() => {
+                setCurrent(i);
+                setProgress(0);
+              }}
+              className="relative h-1.5 rounded-full overflow-hidden transition-all duration-500"
+              style={{ width: i === current ? 48 : 16 }}
+            >
+              <div className="absolute inset-0 bg-dark-border rounded-full" />
+              {i === current && (
+                <motion.div
+                  className="absolute inset-0 bg-gold rounded-full origin-left"
+                  style={{ scaleX: progress / 100 }}
+                />
+              )}
+              {i !== current && (
+                <div className="absolute inset-0 bg-gold/40 rounded-full opacity-0 hover:opacity-100 transition-opacity" />
+              )}
+            </button>
           ))}
+        </div>
+
+        <div className="flex justify-center gap-4 mt-8">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => {
+              setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+              setProgress(0);
+            }}
+            className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={next}
+            className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.button>
         </div>
       </div>
     </section>

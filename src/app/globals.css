@@ -63,7 +63,6 @@ body {
   .glass-card:hover {
     border-color: rgba(201, 169, 110, 0.3);
     background: rgba(20, 20, 20, 0.8);
-    transform: translateY(-8px);
     box-shadow: 0 25px 60px rgba(201, 169, 110, 0.1);
   }
 
@@ -102,9 +101,97 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
+
+  .tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .tilt-card-inner {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(201, 169, 110, 0.5), 0 0 40px rgba(201, 169, 110, 0.2);
+  }
+
+  .gold-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gold-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(201, 169, 110, 0.1) 50%,
+      transparent 70%
+    );
+    animation: shine 4s ease-in-out infinite;
+  }
 }
 
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes draw-line {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #c9a96e; }
+}
+
+@keyframes progress-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes marquee-hover {
+  animation-play-state: paused;
 }

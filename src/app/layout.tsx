@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bobby's Photography | Wedding & Portrait Studio in Punjab, India",
+  title: "Bobby's Photography | Wedding & Portrait Studio in Punjab",
   description:
-    "Professional wedding photography, portraits, fashion, and editorial shoots. Bobby Sharma Photography captures your most precious moments with artistry and passion. Based in Ludhiana, Punjab.",
+    "Bobby Sharma Photography creates wedding and portrait imagery that feels personal, cinematic, and memorable. Based in Ludhiana, Punjab, India.",
 };
 
 export default function RootLayout({

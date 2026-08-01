@@ -67,15 +67,7 @@ export default function Testimonials() {
         <div className="section-divider" />
       </div>
 
-      <div className="absolute inset-0 hero-gradient" />
-      <motion.div
-        animate={{
-          x: [0, 50, -50, 0],
-          y: [0, -30, 30, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full bg-gold/5 blur-[150px]"
-      />
+      <div className="absolute inset-0 bg-dark" />
 
       <div ref={ref} className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
         <motion.div

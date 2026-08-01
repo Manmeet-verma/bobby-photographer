@@ -21,7 +21,7 @@ export default function Marquee() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute inset-0 bg-dark" />
       <div className="absolute inset-0 bg-gradient-to-r from-dark via-transparent to-dark z-10 pointer-events-none" />
       <div className="relative flex">
         <motion.div

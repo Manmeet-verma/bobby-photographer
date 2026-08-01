@@ -19,7 +19,7 @@ export default function QuoteSection() {
 
   return (
     <section ref={sectionRef} className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute inset-0 bg-dark" />
 
       <motion.div
         style={{ scale: decorScale }}

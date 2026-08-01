@@ -12,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
     linear-gradient(180deg, #0a0806 0%, #090705 58%, #060504 100%);
   color: #f5f0e8;
   font-family: 'Inter', sans-serif;
-  overflow-x: clip;
+  overflow: visible;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;

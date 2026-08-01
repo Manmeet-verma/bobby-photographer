@@ -112,7 +112,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.4 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.3] font-bold overflow-visible pb-3"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold pb-3"
+              style={{ lineHeight: "1.4", overflow: "visible" }}
             >
               <span className="block">Capturing</span>{" "}
               <AnimatePresence mode="wait">

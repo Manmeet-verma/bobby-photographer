@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -24,12 +24,11 @@ export default function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const glowX = useMotionValue(0);
+  const glowY = useMotionValue(0);
+  const springGlowX = useSpring(glowX, { stiffness: 50, damping: 20 });
+  const springGlowY = useSpring(glowY, { stiffness: 50, damping: 20 });
 
   const [wordIndex, setWordIndex] = useState(0);
 
@@ -43,8 +42,8 @@ export default function Hero() {
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
-      mouseX.set((e.clientX - rect.left - rect.width / 2) / 20);
-      mouseY.set((e.clientY - rect.top - rect.height / 2) / 20);
+      glowX.set((e.clientX - rect.left - rect.width / 2) / 20);
+      glowY.set((e.clientY - rect.top - rect.height / 2) / 20);
     }
   };
 
@@ -81,24 +80,24 @@ export default function Hero() {
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/40 to-dark z-10" />
         <motion.div
-          style={{ x: springX, y: springY }}
-          className="absolute top-20 right-20 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[120px]"
+          style={{ x: springGlowX, y: springGlowY }}
+          className="absolute top-20 right-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gold/5 blur-[120px]"
         />
         <motion.div
-          style={{ x: useSpring(useMotionValue(-mouseX.get()), { stiffness: 30, damping: 15 }), y: useSpring(useMotionValue(-mouseY.get()), { stiffness: 30, damping: 15 }) }}
-          className="absolute bottom-20 left-20 w-[400px] h-[400px] rounded-full bg-gold/[0.03] blur-[100px]"
+          style={{ x: springGlowY, y: springGlowX }}
+          className="absolute bottom-20 left-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gold/[0.03] blur-[100px]"
         />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div style={{ opacity }} className="space-y-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 w-full">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <motion.div style={{ opacity }} className="space-y-6 sm:space-y-8">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="inline-flex items-center gap-2 text-gold text-sm uppercase tracking-[0.3em] font-medium">
+              <span className="inline-flex items-center gap-2 text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
                 <motion.span
                   initial={{ width: 0 }}
                   animate={{ width: 32 }}
@@ -113,19 +112,21 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.4 }}
-              className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.1] font-bold"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] font-bold"
             >
               <span className="block">Capturing</span>{" "}
-              <motion.span
-                key={wordIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="gradient-text italic inline-block"
-              >
-                {typingWords[wordIndex]}
-              </motion.span>{" "}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={wordIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="gradient-text italic inline-block"
+                >
+                  {typingWords[wordIndex]}
+                </motion.span>
+              </AnimatePresence>{" "}
               <span className="block">Moments</span>
             </motion.h1>
 
@@ -133,7 +134,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-cream-muted text-lg leading-relaxed max-w-lg"
+              className="text-cream-muted text-base sm:text-lg leading-relaxed max-w-lg"
             >
               Wedding and Portrait Studio based in Punjab, India. We
               specialize in creating authentic, emotional, and breathtaking
@@ -144,13 +145,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-3 sm:gap-4"
             >
               <motion.a
                 href="#gallery"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gold text-dark font-semibold uppercase tracking-wider text-sm hover:bg-gold-light transition-colors duration-300 shadow-lg shadow-gold/20 gold-shine"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-gold text-dark font-semibold uppercase tracking-wider text-xs sm:text-sm hover:bg-gold-light transition-colors duration-300 shadow-lg shadow-gold/20 gold-shine"
               >
                 View Portfolio
               </motion.a>
@@ -158,7 +159,7 @@ export default function Hero() {
                 href="#contact"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.15)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border border-gold/40 text-gold font-medium uppercase tracking-wider text-sm hover:bg-gold/10 transition-colors duration-300 gold-border"
+                className="px-6 sm:px-8 py-3 sm:py-4 border border-gold/40 text-gold font-medium uppercase tracking-wider text-xs sm:text-sm hover:bg-gold/10 transition-colors duration-300 gold-border"
               >
                 Get in Touch
               </motion.a>
@@ -168,7 +169,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="flex items-center gap-8 pt-4"
+              className="flex items-center gap-6 sm:gap-8 pt-4"
             >
               {[
                 { value: "35+", label: "Years Experience" },
@@ -182,10 +183,10 @@ export default function Hero() {
                   transition={{ delay: 1.2 + i * 0.15 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <span className="block font-display text-3xl font-bold text-gold text-glow">
+                  <span className="block font-display text-2xl sm:text-3xl font-bold text-gold text-glow">
                     {stat.value}
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-cream-muted">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-cream-muted">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -201,7 +202,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.5 }}
                   whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
+                  className="rounded-lg overflow-hidden shadow-2xl"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop"
@@ -209,7 +210,7 @@ export default function Hero() {
                     width={600}
                     height={800}
                     priority
-                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    sizes="30vw"
                     className="w-full h-64 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
@@ -218,7 +219,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.7 }}
                   whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
-                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
+                  className="rounded-lg overflow-hidden shadow-2xl"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=500&fit=crop"
@@ -226,7 +227,7 @@ export default function Hero() {
                     width={600}
                     height={500}
                     priority
-                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    sizes="30vw"
                     className="w-full h-48 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
@@ -237,7 +238,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.6 }}
                   whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
-                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
+                  className="rounded-lg overflow-hidden shadow-2xl"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=500&fit=crop"
@@ -245,7 +246,7 @@ export default function Hero() {
                     width={600}
                     height={500}
                     priority
-                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    sizes="30vw"
                     className="w-full h-48 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
@@ -254,7 +255,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{ duration: 0.9, delay: 0.8 }}
                   whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                  className="rounded-lg overflow-hidden shadow-2xl tilt-card"
+                  className="rounded-lg overflow-hidden shadow-2xl"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&h=800&fit=crop"
@@ -262,7 +263,7 @@ export default function Hero() {
                     width={600}
                     height={800}
                     priority
-                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    sizes="30vw"
                     className="w-full h-64 object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </motion.div>
@@ -288,20 +289,20 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs uppercase tracking-[0.3em] text-cream-muted">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-cream-muted">
             Scroll Down
           </span>
           <motion.div
             animate={{ scaleY: [1, 0.5, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-px h-8 bg-gradient-to-b from-gold to-transparent"
+            className="w-px h-6 sm:h-8 bg-gradient-to-b from-gold to-transparent"
           />
         </motion.div>
       </motion.div>

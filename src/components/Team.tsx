@@ -39,27 +39,27 @@ export default function Team() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="team" className="py-24 lg:py-32 relative">
+    <section id="team" className="py-16 sm:py-24 lg:py-32 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
 
-      <div ref={ref} className="max-w-7xl mx-auto px-6 pt-16">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-gold text-sm uppercase tracking-[0.3em] font-medium">
+          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Our Team
           </span>
-          <h2 className="font-display text-4xl lg:text-5xl font-bold mt-4">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
             Creative <span className="gradient-text italic">Photographer</span> & Videographer
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
@@ -68,40 +68,40 @@ export default function Team() {
               transition={{ duration: 0.7, delay: i * 0.12 }}
               className="group"
             >
-              <div className="relative overflow-hidden mb-5 rounded-lg">
+              <div className="relative overflow-hidden mb-3 sm:mb-5 rounded-lg">
                 <div className="aspect-[4/5] overflow-hidden">
                   <Image
                     src={member.image}
                     alt={member.name}
                     width={400}
                     height={500}
-                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display text-xl font-semibold text-cream">
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
+                  <h3 className="font-display text-sm sm:text-xl font-semibold text-cream">
                     {member.name}
                   </h3>
-                  <span className="text-gold text-xs uppercase tracking-[0.2em]">
+                  <span className="text-gold text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                     {member.role}
                   </span>
                 </div>
-                <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500">
+                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex flex-col gap-1.5 sm:gap-2 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500">
                   {["F", "T", "I"].map((social, si) => (
                     <motion.a
                       key={si}
                       href="#"
                       whileHover={{ scale: 1.2 }}
-                      className="w-9 h-9 rounded-full bg-dark/60 backdrop-blur-sm border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300 text-xs"
+                      className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-dark/60 backdrop-blur-sm border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300 text-[10px] sm:text-xs"
                     >
                       {social}
                     </motion.a>
                   ))}
                 </div>
               </div>
-              <p className="text-cream-muted text-sm leading-relaxed px-1">
+              <p className="text-cream-muted text-[11px] sm:text-sm leading-relaxed px-1 line-clamp-3 sm:line-clamp-none">
                 {member.description}
               </p>
             </motion.div>

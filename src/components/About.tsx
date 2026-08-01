@@ -67,13 +67,8 @@ export default function About() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-3 sm:space-y-4">
                 {images.slice(0, 2).map((img, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    custom={i}
-                    initial="hidden"
-                    animate={imgInView ? "visible" : "hidden"}
-                    variants={imageVariants}
-                    whileHover={{ y: -6, scale: 1.03 }}
                     className="rounded-lg overflow-hidden shadow-2xl"
                   >
                     <Image

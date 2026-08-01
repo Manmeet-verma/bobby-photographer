@@ -1,0 +1,53 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 21.7s
+ ○ Compiling / ...
+ ✓ Compiled / in 34s (1377 modules)
+ GET / 200 in 31733ms
+ GET / 200 in 37894ms
+ ✓ Compiled in 4s (674 modules)
+ GET / 200 in 460ms
+ ✓ Compiled in 7.8s (1377 modules)
+ ⨯ ./src/components/About.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\Raman\Desktop\bobby\photography-site\src\components\About.tsx[0m:55:1]
+ [2m55[0m |   const borderScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1]);
+ [2m56[0m | 
+ [2m57[0m |   return (
+ [2m58[0m |     <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative">
+    : [31;1m     ^^^^^^^[0m
+ [2m59[0m |       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
+ [2m60[0m |         <div className="section-divider" />
+ [2m61[0m |       </div>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/About.tsx
+./src/app/page.tsx
+ ⨯ ./src/components/About.tsx
+Error: 
+  [31mx[0m Unexpected token `section`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\Raman\Desktop\bobby\photography-site\src\components\About.tsx[0m:55:1]
+ [2m55[0m |   const borderScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1]);
+ [2m56[0m | 
+ [2m57[0m |   return (
+ [2m58[0m |     <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative">
+    : [31;1m     ^^^^^^^[0m
+ [2m59[0m |       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
+ [2m60[0m |         <div className="section-divider" />
+ [2m61[0m |       </div>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/About.tsx
+./src/app/page.tsx
+ ○ Compiling /_not-found ...

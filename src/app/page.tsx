@@ -11,11 +11,17 @@ import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
 import Marquee from "@/components/Marquee";
+import CustomCursor from "@/components/CustomCursor";
+import BackToTop from "@/components/BackToTop";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import CTA from "@/components/CTA";
+import QuoteSection from "@/components/QuoteSection";
 
 export default function Home() {
   return (
     <>
       <Preloader />
+      <CustomCursor />
       <ScrollProgress />
       <main>
         <Navbar />
@@ -25,11 +31,15 @@ export default function Home() {
         <Marquee />
         <Services />
         <Gallery />
+        <CTA />
         <Team />
+        <QuoteSection />
         <Testimonials />
         <Contact />
         <Footer />
       </main>
+      <BackToTop />
+      <WhatsAppButton />
     </>
   );
 }

@@ -15,9 +15,24 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      const sections = navLinks.map((l) => l.href.slice(1));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 150) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -28,6 +43,7 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "";
     }
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   return (
@@ -42,67 +58,79 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <motion.a
             href="#home"
             whileHover={{ scale: 1.02 }}
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center">
-              <span className="font-display text-gold text-lg font-bold">B</span>
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-gold flex items-center justify-center">
+              <span className="font-display text-gold text-base sm:text-lg font-bold">B</span>
             </div>
             <div className="hidden sm:block">
-              <span className="font-display text-lg tracking-wide text-cream">
+              <span className="font-display text-base sm:text-lg tracking-wide text-cream">
                 Bobby&apos;s
               </span>
-              <span className="block text-[10px] uppercase tracking-[0.3em] text-gold">
+              <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-gold">
                 Photography
               </span>
             </div>
           </motion.a>
 
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                whileHover={{ y: -2 }}
-                className="relative text-sm uppercase tracking-[0.15em] text-cream-muted hover:text-gold transition-colors duration-300 gold-border"
-              >
-                {link.label}
-              </motion.a>
-            ))}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  whileHover={{ y: -2 }}
+                  className={`relative px-4 py-2 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
+                    isActive ? "text-gold" : "text-cream-muted hover:text-gold"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-gold"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </motion.a>
+              );
+            })}
           </div>
 
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-dark transition-all duration-300"
-          >
-            Book Now
-          </motion.a>
+          <div className="flex items-center gap-3">
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-dark transition-all duration-300"
+            >
+              Book Now
+            </motion.a>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-              className="block w-6 h-0.5 bg-gold"
-            />
-            <motion.span
-              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block w-6 h-0.5 bg-gold"
-            />
-            <motion.span
-              animate={
-                mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
-              }
-              className="block w-6 h-0.5 bg-gold"
-            />
-          </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden flex flex-col gap-1.5 p-2 relative z-50"
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                className="block w-6 h-0.5 bg-gold origin-center"
+              />
+              <motion.span
+                animate={mobileOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+                className="block w-6 h-0.5 bg-gold"
+              />
+              <motion.span
+                animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                className="block w-6 h-0.5 bg-gold origin-center"
+              />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -112,22 +140,45 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-dark/98 backdrop-blur-xl flex flex-col items-center justify-center"
           >
-            {navLinks.map((link, i) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                initial={{ opacity: 0, y: 30 }}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,110,0.05),transparent_60%)]" />
+            <div className="relative flex flex-col items-center gap-2">
+              {navLinks.map((link, i) => {
+                const isActive = activeSection === link.href.slice(1);
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    onClick={() => setMobileOpen(false)}
+                    className={`font-display text-3xl sm:text-4xl transition-colors duration-300 py-2 ${
+                      isActive ? "text-gold" : "text-cream hover:text-gold"
+                    }`}
+                  >
+                    {link.label}
+                  </motion.a>
+                );
+              })}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 30 }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => setMobileOpen(false)}
-                className="font-display text-3xl text-cream hover:text-gold transition-colors"
+                transition={{ delay: 0.6 }}
+                className="mt-6"
               >
-                {link.label}
-              </motion.a>
-            ))}
+                <a
+                  href="#contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="px-8 py-3 bg-gold text-dark font-semibold uppercase tracking-wider text-sm"
+                >
+                  Book Now
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

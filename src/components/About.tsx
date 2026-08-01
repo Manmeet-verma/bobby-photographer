@@ -55,7 +55,7 @@ export default function About() {
   const borderScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1]);
 
   return (
-    <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
@@ -79,7 +79,7 @@ export default function About() {
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                       className="w-full h-48 sm:h-56 lg:h-72 object-cover"
                     />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">

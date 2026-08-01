@@ -129,7 +129,7 @@ export default function Services() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="services" className="py-16 sm:py-24 lg:py-32 relative">
+    <section id="services" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>

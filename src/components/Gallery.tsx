@@ -47,7 +47,7 @@ function TiltCard({ item, index, onClick }: { item: typeof galleryItems[0]; inde
       initial={{ opacity: 0, scale: 0.8, rotateX: -10 }}
       animate={{ opacity: 1, scale: 1, rotateX: 0 }}
       exit={{ opacity: 0, scale: 0.8, rotateX: 10 }}
-      transition={{ duration: 1.0, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       whileHover={{ scale: 1.02, zIndex: 10 }}
       onMouseMove={handleMouseMove}

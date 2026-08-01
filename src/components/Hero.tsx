@@ -52,7 +52,7 @@ export default function Hero() {
       id="home"
       ref={ref}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center hero-gradient overflow-hidden"
+      className="relative min-h-screen flex items-center hero-gradient overflow-x-hidden"
     >
       {particles.map((p) => (
         <motion.div
@@ -112,7 +112,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.4 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] font-bold"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.2] font-bold overflow-visible"
             >
               <span className="block">Capturing</span>{" "}
               <AnimatePresence mode="wait">

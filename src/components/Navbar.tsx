@@ -54,7 +54,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "nav-blur border-b border-dark-border shadow-2xl"
+            ? "nav-blur border-b border-light-border shadow-2xl"
             : "bg-transparent"
         }`}
       >
@@ -64,14 +64,14 @@ export default function Navbar() {
             whileHover={{ scale: 1.02 }}
             className="flex items-center gap-3"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-gold flex items-center justify-center">
-              <span className="font-display text-gold text-base sm:text-lg font-bold">B</span>
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-accent flex items-center justify-center">
+              <span className="font-display text-accent text-base sm:text-lg font-bold">B</span>
             </div>
             <div className="hidden sm:block">
-              <span className="font-display text-base sm:text-lg tracking-wide text-cream">
+              <span className="font-display text-base sm:text-lg tracking-wide text-ink">
                 Bobby&apos;s
               </span>
-              <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-gold">
+              <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-accent">
                 Photography
               </span>
             </div>
@@ -86,14 +86,14 @@ export default function Navbar() {
                   href={link.href}
                   whileHover={{ y: -2 }}
                   className={`relative px-4 py-2 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
-                    isActive ? "text-gold" : "text-cream-muted hover:text-gold"
+                    isActive ? "text-accent" : "text-ink-muted hover:text-accent"
                   }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-gold"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-accent"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -107,7 +107,7 @@ export default function Navbar() {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-dark transition-all duration-300"
+              className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 border border-accent text-accent text-sm uppercase tracking-widest hover:bg-accent hover:text-light transition-all duration-300"
             >
               Book Now
             </motion.a>
@@ -119,15 +119,15 @@ export default function Navbar() {
             >
               <motion.span
                 animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-0.5 bg-gold origin-center"
+                className="block w-6 h-0.5 bg-accent origin-center"
               />
               <motion.span
                 animate={mobileOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                className="block w-6 h-0.5 bg-gold"
+                className="block w-6 h-0.5 bg-accent"
               />
               <motion.span
                 animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-0.5 bg-gold origin-center"
+                className="block w-6 h-0.5 bg-accent origin-center"
               />
             </button>
           </div>
@@ -141,9 +141,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-dark/98 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-light/98 backdrop-blur-xl flex flex-col items-center justify-center"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,110,0.05),transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(75,85,99,0.05),transparent_60%)]" />
             <div className="relative flex flex-col items-center gap-2">
               {navLinks.map((link, i) => {
                 const isActive = activeSection === link.href.slice(1);
@@ -157,7 +157,7 @@ export default function Navbar() {
                     transition={{ delay: i * 0.08, duration: 0.4 }}
                     onClick={() => setMobileOpen(false)}
                     className={`font-display text-3xl sm:text-4xl transition-colors duration-300 py-2 ${
-                      isActive ? "text-gold" : "text-cream hover:text-gold"
+                      isActive ? "text-accent" : "text-ink hover:text-accent"
                     }`}
                   >
                     {link.label}
@@ -173,7 +173,7 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setMobileOpen(false)}
-                  className="px-8 py-3 bg-gold text-dark font-semibold uppercase tracking-wider text-sm"
+                  className="px-8 py-3 bg-accent text-light font-semibold uppercase tracking-wider text-sm"
                 >
                   Book Now
                 </a>

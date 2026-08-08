@@ -55,7 +55,7 @@ export default function About() {
   const borderScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1]);
 
   return (
-    <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-24 lg:py-32 relative bg-light">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
@@ -107,7 +107,7 @@ export default function About() {
             </div>
             <motion.div
               style={{ opacity: borderOpacity, scale: borderScale }}
-              className="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 w-full h-full border border-gold/20 rounded-lg -z-10"
+              className="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 w-full h-full border border-accent/20 rounded-lg -z-10"
             />
           </div>
 
@@ -117,7 +117,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={textInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium inline-block"
+              className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium inline-block"
             >
               About Us
             </motion.span>
@@ -137,14 +137,14 @@ export default function About() {
               initial={{ width: 0 }}
               animate={textInView ? { width: 64 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="h-1 bg-gold"
+              className="h-1 bg-accent"
             />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={textInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-cream-muted leading-relaxed text-sm sm:text-base"
+              className="text-ink-muted leading-relaxed text-sm sm:text-base"
             >
               We specialize in wedding photography, corporate events, family
               and senior portraits, often traveling to your destination to
@@ -157,7 +157,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={textInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-cream-muted leading-relaxed text-sm sm:text-base"
+              className="text-ink-muted leading-relaxed text-sm sm:text-base"
             >
               For Bobby Sharma Photography, creating photos filled with myriad
               moods, emotions, and moments is the most important aim. Be it a
@@ -174,12 +174,12 @@ export default function About() {
                   transition={{ duration: 0.5, delay: 0.5 + i * 0.08 }}
                   className="flex items-center gap-2 sm:gap-3"
                 >
-                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-xs sm:text-sm text-cream-muted">{item}</span>
+                  <span className="text-xs sm:text-sm text-ink-muted">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -189,9 +189,9 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={textInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.2)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(75,85,99,0.15)" }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block px-6 sm:px-8 py-3 sm:py-4 border border-gold text-gold font-medium uppercase tracking-wider text-xs sm:text-sm hover:bg-gold hover:text-dark transition-colors duration-300"
+              className="inline-block px-6 sm:px-8 py-3 sm:py-4 border border-accent text-accent font-medium uppercase tracking-wider text-xs sm:text-sm hover:bg-accent hover:text-light transition-colors duration-300"
             >
               Learn More
             </motion.a>

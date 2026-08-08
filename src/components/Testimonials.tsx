@@ -67,7 +67,7 @@ export default function Testimonials() {
         <div className="section-divider" />
       </div>
 
-      <div className="absolute inset-0 bg-dark" />
+      <div className="absolute inset-0 bg-light-card" />
 
       <div ref={ref} className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
         <motion.div
@@ -76,7 +76,7 @@ export default function Testimonials() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+          <span className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Client&apos;s Review
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
@@ -97,7 +97,7 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -60 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="glass-card p-6 sm:p-10 text-center gold-shine"
+              className="glass-card p-6 sm:p-10 text-center accent-shine"
             >
               <div className="flex justify-center mb-4 sm:mb-6">
                 {Array.from({ length: testimonials[current].rating }).map(
@@ -107,7 +107,7 @@ export default function Testimonials() {
                       initial={{ opacity: 0, rotate: -180 }}
                       animate={{ opacity: 1, rotate: 0 }}
                       transition={{ delay: 0.3 + i * 0.1 }}
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-gold mx-0.5"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-accent mx-0.5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -116,23 +116,23 @@ export default function Testimonials() {
                   )
                 )}
               </div>
-              <blockquote className="font-display text-base sm:text-xl lg:text-2xl text-cream italic leading-relaxed mb-6 sm:mb-8">
+              <blockquote className="font-display text-base sm:text-xl lg:text-2xl text-ink italic leading-relaxed mb-6 sm:mb-8">
                 &ldquo;{testimonials[current].text}&rdquo;
               </blockquote>
               <div className="flex items-center justify-center gap-3 sm:gap-4">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gold/20 flex items-center justify-center border-2 border-gold/30"
+                  className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-accent/20 flex items-center justify-center border-2 border-accent/30"
                 >
-                  <span className="font-display text-lg sm:text-xl text-gold font-bold">
+                  <span className="font-display text-lg sm:text-xl text-accent font-bold">
                     {testimonials[current].name.charAt(0)}
                   </span>
                 </motion.div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-cream text-sm sm:text-lg">
+                  <h4 className="font-semibold text-ink text-sm sm:text-lg">
                     {testimonials[current].name}
                   </h4>
-                  <span className="text-[10px] sm:text-xs text-gold uppercase tracking-wider">
+                  <span className="text-[10px] sm:text-xs text-accent uppercase tracking-wider">
                     Valued Client
                   </span>
                 </div>
@@ -152,10 +152,10 @@ export default function Testimonials() {
               className="relative h-1.5 rounded-full overflow-hidden transition-all duration-500"
               style={{ width: i === current ? 40 : 14 }}
             >
-              <div className="absolute inset-0 bg-dark-border rounded-full" />
+              <div className="absolute inset-0 bg-light-border rounded-full" />
               {i === current && (
                 <motion.div
-                  className="absolute inset-0 bg-gold rounded-full origin-left"
+                  className="absolute inset-0 bg-accent rounded-full origin-left"
                   style={{ scaleX: progress / 100 }}
                 />
               )}
@@ -171,7 +171,7 @@ export default function Testimonials() {
               setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
               setProgress(0);
             }}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-accent/30 flex items-center justify-center text-accent hover:bg-accent hover:text-light transition-all duration-300"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -181,7 +181,7 @@ export default function Testimonials() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={next}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-accent/30 flex items-center justify-center text-accent hover:bg-accent hover:text-light transition-all duration-300"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

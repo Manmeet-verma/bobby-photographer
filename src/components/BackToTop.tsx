@@ -19,10 +19,10 @@ export default function BackToTop() {
           initial={{ opacity: 0, scale: 0, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 20 }}
-          whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(201,169,110,0.3)" }}
+          whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(75,85,99,0.25)" }}
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full bg-gold text-dark flex items-center justify-center shadow-lg shadow-gold/20 lg:bottom-8"
+          className="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full bg-accent text-light flex items-center justify-center shadow-lg shadow-accent/20 lg:bottom-8"
           aria-label="Back to top"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

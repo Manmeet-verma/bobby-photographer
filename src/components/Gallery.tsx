@@ -65,20 +65,20 @@ function TiltCard({ item, index, onClick }: { item: typeof galleryItems[0]; inde
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-3 sm:p-5">
-        <span className="text-gold text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-1">
+      <div className="absolute inset-0 bg-gradient-to-t from-light/90 via-light/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-3 sm:p-5">
+        <span className="text-accent text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-1">
           {item.category}
         </span>
-        <h3 className="font-display text-base sm:text-xl font-semibold text-cream">
+        <h3 className="font-display text-base sm:text-xl font-semibold text-ink">
           {item.title}
         </h3>
       </div>
-      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-cream/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100">
-        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-cream" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-ink/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100">
+        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
         </svg>
       </div>
-      <div className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 rounded-lg pointer-events-none" />
+      <div className="absolute inset-0 border-2 border-accent/0 group-hover:border-accent/30 transition-all duration-500 rounded-lg pointer-events-none" />
     </motion.div>
   );
 }
@@ -94,7 +94,7 @@ export default function Gallery() {
       : galleryItems.filter((item) => item.category === activeFilter);
 
   return (
-    <section id="gallery" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
+    <section id="gallery" className="py-16 sm:py-24 lg:py-32 relative bg-light">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
@@ -106,7 +106,7 @@ export default function Gallery() {
           transition={{ duration: 0.8 }}
           className="text-center mb-8 sm:mb-12"
         >
-          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+          <span className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Our Works
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
@@ -129,8 +129,8 @@ export default function Gallery() {
               onClick={() => setActiveFilter(cat)}
               className={`px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                 activeFilter === cat
-                  ? "bg-gold text-dark shadow-lg shadow-gold/20"
-                  : "border border-dark-border text-cream-muted hover:border-gold hover:text-gold"
+                  ? "bg-accent text-light shadow-lg shadow-accent/20"
+                  : "border border-light-border text-ink-muted hover:border-accent hover:text-accent"
               }`}
             >
               {cat}
@@ -159,14 +159,14 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-dark/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-light/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
             onClick={() => setLightbox(null)}
           >
             <motion.button
               initial={{ opacity: 0, rotate: -90 }}
               animate={{ opacity: 1, rotate: 0 }}
               transition={{ delay: 0.2 }}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all z-10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-accent/40 flex items-center justify-center text-accent hover:bg-accent hover:text-light transition-all z-10"
               onClick={() => setLightbox(null)}
             >
               <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

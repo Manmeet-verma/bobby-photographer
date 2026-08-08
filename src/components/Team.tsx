@@ -39,7 +39,7 @@ export default function Team() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="team" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
+    <section id="team" className="py-16 sm:py-24 lg:py-32 relative bg-light">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
@@ -51,7 +51,7 @@ export default function Team() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+          <span className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Our Team
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
@@ -79,12 +79,12 @@ export default function Team() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-light via-light/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
-                  <h3 className="font-display text-sm sm:text-xl font-semibold text-cream">
+                  <h3 className="font-display text-sm sm:text-xl font-semibold text-ink">
                     {member.name}
                   </h3>
-                  <span className="text-gold text-[10px] sm:text-xs uppercase tracking-[0.2em]">
+                  <span className="text-accent text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                     {member.role}
                   </span>
                 </div>
@@ -94,14 +94,14 @@ export default function Team() {
                       key={si}
                       href="#"
                       whileHover={{ scale: 1.2 }}
-                      className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-dark/60 backdrop-blur-sm border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-dark transition-all duration-300 text-[10px] sm:text-xs"
+                      className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-light/60 backdrop-blur-sm border border-accent/30 flex items-center justify-center text-accent hover:bg-accent hover:text-light transition-all duration-300 text-[10px] sm:text-xs"
                     >
                       {social}
                     </motion.a>
                   ))}
                 </div>
               </div>
-              <p className="text-cream-muted text-[11px] sm:text-sm leading-relaxed px-1 line-clamp-3 sm:line-clamp-none">
+              <p className="text-ink-muted text-[11px] sm:text-sm leading-relaxed px-1 line-clamp-3 sm:line-clamp-none">
                 {member.description}
               </p>
             </motion.div>

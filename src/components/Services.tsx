@@ -96,9 +96,9 @@ function ServiceCard({ service, index, inView }: { service: typeof services[0]; 
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-light via-light/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-          <p className="text-cream text-xs sm:text-sm leading-relaxed line-clamp-3">
+          <p className="text-ink text-xs sm:text-sm leading-relaxed line-clamp-3">
             {service.description}
           </p>
         </div>
@@ -107,7 +107,7 @@ function ServiceCard({ service, index, inView }: { service: typeof services[0]; 
         <motion.div
           whileHover={{ rotate: 360, scale: 1.1 }}
           transition={{ duration: 0.6 }}
-          className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-gold/10 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-dark transition-all duration-500"
+          className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-light transition-all duration-500"
         >
           {service.icon}
         </motion.div>
@@ -118,7 +118,7 @@ function ServiceCard({ service, index, inView }: { service: typeof services[0]; 
           initial={{ width: 32 }}
           whileInView={{ width: 64 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="h-0.5 bg-gold mx-auto"
+          className="h-0.5 bg-accent mx-auto"
         />
       </div>
     </motion.div>
@@ -129,7 +129,7 @@ export default function Services() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="services" className="py-16 sm:py-24 lg:py-32 relative bg-dark">
+    <section id="services" className="py-16 sm:py-24 lg:py-32 relative bg-light">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl">
         <div className="section-divider" />
       </div>
@@ -141,7 +141,7 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+          <span className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Our Services
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">

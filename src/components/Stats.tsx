@@ -71,7 +71,7 @@ export default function Stats() {
 
   return (
     <section className="py-16 sm:py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-dark" />
+      <div className="absolute inset-0 bg-light-card" />
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -79,7 +79,7 @@ export default function Stats() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+          <span className="text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
             Why Choose Us
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
@@ -97,15 +97,15 @@ export default function Stats() {
               transition={{ duration: 0.6, delay: i * 0.2 }}
               className="glass-card p-6 sm:p-8 text-center group"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full border-2 border-gold/30 flex items-center justify-center group-hover:border-gold transition-colors duration-500 animate-pulse-gold">
-                <span className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gold">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full border-2 border-accent/30 flex items-center justify-center group-hover:border-accent transition-colors duration-500 animate-pulse-accent">
+                <span className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-accent">
                   <Counter end={stat.number} suffix={stat.suffix} inView={inView} />
                 </span>
               </div>
               <h3 className="font-display text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                 {stat.label}
               </h3>
-              <p className="text-cream-muted text-xs sm:text-sm leading-relaxed">
+              <p className="text-ink-muted text-xs sm:text-sm leading-relaxed">
                 {stat.description}
               </p>
             </motion.div>

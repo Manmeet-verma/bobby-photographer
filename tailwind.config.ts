@@ -9,20 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: {
-          DEFAULT: "#c9a96e",
-          light: "#dfc08a",
-          dark: "#a6854a",
+        accent: {
+          DEFAULT: "#4b5563",
+          light: "#6b7280",
+          dark: "#374151",
         },
-        dark: {
-          DEFAULT: "#0a0a0a",
-          card: "#141414",
-          surface: "#1a1a1a",
-          border: "#2a2a2a",
+        light: {
+          DEFAULT: "#ffffff",
+          card: "#f4f4f5",
+          surface: "#fafafa",
+          border: "#e4e4e7",
         },
-        cream: {
-          DEFAULT: "#f5f0e8",
-          muted: "#b8b0a0",
+        ink: {
+          DEFAULT: "#111827",
+          muted: "#6b7280",
         },
       },
       fontFamily: {
@@ -36,7 +36,7 @@ const config: Config = {
         "fade-in-right": "fadeInRight 0.8s ease-out forwards",
         "scale-in": "scaleIn 0.6s ease-out forwards",
         float: "float 3s ease-in-out infinite",
-        "pulse-gold": "pulseGold 2s ease-in-out infinite",
+        "pulse-accent": "pulseAccent 2s ease-in-out infinite",
         shimmer: "shimmer 3s ease-in-out infinite",
       },
       keyframes: {
@@ -64,9 +64,9 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        pulseGold: {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(201, 169, 110, 0.4)" },
-          "50%": { boxShadow: "0 0 20px 10px rgba(201, 169, 110, 0.1)" },
+        pulseAccent: {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(75, 85, 99, 0.35)" },
+          "50%": { boxShadow: "0 0 20px 10px rgba(75, 85, 99, 0.1)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },

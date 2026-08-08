@@ -57,7 +57,7 @@ export default function Hero() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-gold/20"
+          className="absolute rounded-full bg-accent/20"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -78,14 +78,14 @@ export default function Hero() {
       ))}
 
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/40 to-dark z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-light/60 via-light/40 to-light z-10" />
         <motion.div
           style={{ x: springGlowX, y: springGlowY }}
-          className="absolute top-20 right-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gold/5 blur-[120px]"
+          className="absolute top-20 right-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-accent/5 blur-[120px]"
         />
         <motion.div
           style={{ x: springGlowY, y: springGlowX }}
-          className="absolute bottom-20 left-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gold/[0.03] blur-[100px]"
+          className="absolute bottom-20 left-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-accent/[0.03] blur-[100px]"
         />
       </motion.div>
 
@@ -97,12 +97,12 @@ export default function Hero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="inline-flex items-center gap-2 text-gold text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
+              <span className="inline-flex items-center gap-2 text-accent text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium">
                 <motion.span
                   initial={{ width: 0 }}
                   animate={{ width: 32 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="h-px bg-gold inline-block"
+                  className="h-px bg-accent inline-block"
                 />
                 Welcome to Bobby&apos;s Photography
               </span>
@@ -135,7 +135,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-cream-muted text-base sm:text-lg leading-relaxed max-w-lg"
+              className="text-ink-muted text-base sm:text-lg leading-relaxed max-w-lg"
             >
               Wedding and Portrait Studio based in Punjab, India. We
               specialize in creating authentic, emotional, and breathtaking
@@ -150,17 +150,17 @@ export default function Hero() {
             >
               <motion.a
                 href="#gallery"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.3)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(75,85,99,0.25)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-gold text-dark font-semibold uppercase tracking-wider text-xs sm:text-sm hover:bg-gold-light transition-colors duration-300 shadow-lg shadow-gold/20 gold-shine"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-accent text-light font-semibold uppercase tracking-wider text-xs sm:text-sm hover:bg-accent-dark transition-colors duration-300 shadow-lg shadow-accent/20 accent-shine"
               >
                 View Portfolio
               </motion.a>
               <motion.a
                 href="#contact"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.15)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(75,85,99,0.12)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 border border-gold/40 text-gold font-medium uppercase tracking-wider text-xs sm:text-sm hover:bg-gold/10 transition-colors duration-300 gold-border"
+                className="px-6 sm:px-8 py-3 sm:py-4 border border-accent/40 text-accent font-medium uppercase tracking-wider text-xs sm:text-sm hover:bg-accent/10 transition-colors duration-300 accent-border"
               >
                 Get in Touch
               </motion.a>
@@ -184,10 +184,10 @@ export default function Hero() {
                   transition={{ delay: 1.2 + i * 0.15 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <span className="block font-display text-2xl sm:text-3xl font-bold text-gold text-glow">
+                  <span className="block font-display text-2xl sm:text-3xl font-bold text-accent text-glow">
                     {stat.value}
                   </span>
-                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-cream-muted">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-ink-muted">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -274,13 +274,13 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 1.2 }}
-              className="absolute -top-6 -right-6 w-32 h-32 border border-gold/20 rounded-lg"
+              className="absolute -top-6 -right-6 w-32 h-32 border border-accent/20 rounded-lg"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 1.4 }}
-              className="absolute -bottom-6 -left-6 w-24 h-24 border border-gold/20 rounded-lg"
+              className="absolute -bottom-6 -left-6 w-24 h-24 border border-accent/20 rounded-lg"
             />
           </div>
         </div>

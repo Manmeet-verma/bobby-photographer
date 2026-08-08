@@ -52,7 +52,7 @@ export default function Hero() {
       id="home"
       ref={ref}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center hero-gradient"
+      className="relative min-h-svh flex items-center hero-gradient"
     >
       {particles.map((p) => (
         <motion.div
@@ -89,7 +89,7 @@ export default function Hero() {
         />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-20 sm:pb-24 lg:pb-28 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-12 sm:pb-16 lg:pb-20 w-full">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div style={{ opacity }} className="space-y-6 sm:space-y-8">
             <motion.div
